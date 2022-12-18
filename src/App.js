@@ -1,4 +1,9 @@
-import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Outlet,
+  ScrollRestoration,
+} from 'react-router-dom';
 import Home from './pages/Home';
 import Products from './pages/Products';
 import Product from './pages/Product';
@@ -12,6 +17,7 @@ const Layout = () => {
       <Navbar />
       <Outlet />
       <Footer />
+      <ScrollRestoration />
     </div>
   );
 };
