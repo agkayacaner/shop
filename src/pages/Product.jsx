@@ -14,7 +14,7 @@ const Product = () => {
   const [like, setLike] = useState(false);
   const [quantity, setQuantity] = useState(1);
   return (
-    <div className='flex flex-col-reverse md:flex-row p-10'>
+    <div className='flex flex-col-reverse md:flex-row px-10'>
       {/* left */}
       <div className='flex-1'>
         {/* image area 1 */}
@@ -46,7 +46,7 @@ const Product = () => {
         </div>
       </div>
       {/* right */}
-      <div className='flex flex-col  p-5 md:w-1/3 top-0 md:sticky lg:h-screen'>
+      <div className='flex flex-col  p-5 md:w-1/3 top-0 md:sticky lg:h-screen bg-gray-100'>
         <div className='flex items-center justify-between dark:text-gray-300'>
           <h3 className='text-2xl mb-2 '>Jakarlı Triko Kazak</h3>
           <button onClick={() => setLike(!like)}>

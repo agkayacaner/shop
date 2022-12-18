@@ -6,12 +6,37 @@ import {
   FiUser,
   FiMenu,
 } from 'react-icons/fi';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Cart from './Cart';
 import Searchbox from './Searchbox';
+
+let useClickOutside = (handler) => {
+  let domNode = useRef();
+
+  useEffect(() => {
+    let maybeHandler = (event) => {
+      if (!domNode.current.contains(event.target)) {
+        handler();
+      }
+    };
+
+    document.addEventListener('mousedown', maybeHandler);
+
+    return () => {
+      document.removeEventListener('mousedown', maybeHandler);
+    };
+  });
+
+  return domNode;
+};
+
 const Navbar = () => {
-  const [open, setOpen] = useState(false);
+  let [isOpen, setIsOpen] = useState(false);
   const [openSearch, setOpenSearch] = useState(false);
+
+  let domNode = useClickOutside(() => {
+    setIsOpen(false);
+  });
 
   return (
     <div className='grid grid-cols-3 px-10 py-5 bg-white dark:bg-[#000]'>
@@ -24,6 +49,7 @@ const Navbar = () => {
         <Link to='/products/3'>Çocuk</Link>
         <Link to='/products/4'>Aksesuar</Link>
         <FiSearch
+          ref={domNode}
           size={18}
           onClick={() => setOpenSearch(!openSearch)}
           className='cursor-pointer'
@@ -47,8 +73,9 @@ const Navbar = () => {
           <FiUser size={18} />
           <FiHeart size={18} />
           <div
+            ref={domNode}
             className='relative cursor-pointer'
-            onClick={() => setOpen(!open)}
+            onClick={() => setIsOpen((isOpen) => !isOpen)}
           >
             <FiShoppingCart size={18} />
             <span className='absolute flex justify-center items-center -right-4 -top-3 text-xs text-white font-semibold bg-red-500 dark:bg-[#9A0680] h-5 w-5 rounded-full'>
@@ -57,7 +84,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-      {open && <Cart />}
+      {isOpen && <Cart />}
       {openSearch && <Searchbox />}
     </div>
   );
