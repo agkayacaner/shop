@@ -7,10 +7,10 @@ import Slider from '../components/Slider';
 const Home = () => {
   return (
     <div className='space-y-10'>
-      <Slider />
-      <FeaturedProducts type='Yeni' />
+      {/* <Slider /> */}
+      <FeaturedProducts type='trending' />
       <Hero />
-      <FeaturedProducts type='Öne Çıkan' />
+      <FeaturedProducts type='featured' />
       <Maganize />
     </div>
   );
